@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agent for Business Automation</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== Landing page ===== -->
+<section id="landing" class="landing" hidden>
+  <div class="hero">
+    <img src="assets/logo.svg" alt="" class="hero-logo" width="56" height="56">
+    <p class="kicker">B.Tech project, Noida International University</p>
+    <h1>Autonomous AI Agent for Business Automation</h1>
+    <p class="lead">Give the agent a business instruction. Watch it analyse the request, pick a task, run it and report back, step by step.</p>
+    <div class="hero-btns">
+      <button class="btn primary big" data-act="enter">Open dashboard</button>
+      <button class="btn ghost big" data-act="landingDemo">Start demo</button>
+    </div>
+    <p class="fine">Prototype with sample data. The agent is rule-based and runs entirely in your browser; no external AI service is connected.</p>
+  </div>
+  <div class="hero-flow" aria-label="How the agent works">
+    <div><b>1</b>User instruction</div><div><b>2</b>Input analysis</div><div><b>3</b>Task identification</div>
+    <div><b>4</b>Decision making</div><div><b>5</b>Task execution</div><div><b>6</b>Result</div>
+  </div>
+</section>
+
+<!-- ===== Application shell ===== -->
+<div id="app" class="app" hidden>
+  <aside id="sidebar" class="sidebar">
+    <a class="brand" href="#landing"><img src="assets/logo.svg" alt="" width="32" height="32"><span>AutoAgent<small>Business automation</small></span></a>
+    <nav>
+      <a href="#dashboard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>Dashboard</a>
+      <a href="#agent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14v10H5zM12 8V4M9 13h.01M15 13h.01"/></svg>AI Agent</a>
+      <a href="#workflow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 14h6v6h-6zM7 10v2a2 2 0 002 2h5"/></svg>Workflow</a>
+      <a href="#tasks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg>Tasks</a>
+      <a href="#sales"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>Sales</a>
+      <a href="#expenses"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v12H3zM3 11h18M7 15h3"/></svg>Expenses</a>
+      <a href="#customers"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M10 10a3 3 0 100-6 3 3 0 000 6M20 20v-2a3 3 0 00-2-2.8"/></svg>Customers</a>
+      <a href="#reports"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg>Reports</a>
+      <a href="#activity"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Activity</a>
+      <a href="#settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9a3 3 0 100 6 3 3 0 000-6zM12 3v3M12 18v3M3 12h3M18 12h3"/></svg>Settings</a>
+    </nav>
+    <p class="side-note">Demo data only. Stored in this browser.</p>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu" data-act="menu" aria-label="Open menu">Menu</button>
+      <h2 id="pageTitle">Dashboard</h2>
+      <div class="top-actions">
+        <span class="pill-label">Agent <span class="pill js-agent">Idle</span></span>
+        <button class="btn" data-act="theme">Light / dark</button>
+        <button class="btn primary" data-act="demoOpen">Start Demo</button>
+      </div>
+    </header>
+    <main id="view" class="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<!-- ===== Demo Mode panel ===== -->
+<aside id="demoPanel" class="demo-panel" aria-label="Demo mode">
+  <div class="demo-head"><h3>Demo Mode</h3><button class="icon-btn" data-act="demoClose" aria-label="Close demo panel">Close</button></div>
+  <p class="muted">Preloaded business data, ready-made commands and one-click examples for your presentation.</p>
+  <button class="btn primary wide" data-act="demoStart">Run guided demo</button>
+  <button class="btn wide" data-act="demoReset">Reset demo data</button>
+  <h4>Example commands</h4>
+  <div id="demoCommands" class="chips col"></div>
+  <h4>One-click automations</h4>
+  <div class="chips col">
+    <button class="chip" data-act="demoSampleTask">Add a sample task</button>
+    <button class="chip" data-act="demoBulkFollow">Create follow-up drafts for all new customers</button>
+    <button class="chip" data-act="demoReport">Generate the full report</button>
+  </div>
+</aside>
+<div id="demoBanner" class="demo-banner" hidden role="status"><span id="demoBannerText"></span><button class="btn small" data-act="demoStop">Stop demo</button></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<noscript><p style="padding:24px">This demo needs JavaScript. Please open it in Google Chrome.</p></noscript>
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+<script src="js/agent.js"></script>
+<script src="js/pages.js"></script>
+</body>
+</html>
